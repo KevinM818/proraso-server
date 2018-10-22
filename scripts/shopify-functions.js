@@ -11,45 +11,6 @@ const shopify = new Shopify({
   password: process.env.SHOP_PASSWORD || SHOP_PASSWORD
 });
 
-/* Set of Functions To Retrieve All the Products From the Store */
-async function getAllProducts(){
-  //Returns all the products in the store to send to client server
-  try{
-    let numOfProducts = await getNumOfProducts();
-    let productsList = await fetchProducts(Math.ceil(numOfProducts/250));
-    return productsList;
-  }catch(e){
-    console.log('Error Fetching All Products');
-  }
-}
-function getNumOfProducts(){
-  //Gets the number of products in the store
-  return shopify.product.count();
-}
-async function fetchProducts(page, productList = []){
-  //Returns all the product objects in the store
-  try{
-    if(page != 0){
-      let products = await getPageOfProducts(page);
-      let updatedProductList = [...productList, ...products];
-      return await fetchProducts(page - 1, updatedProductList);
-    }else{
-      return productList;
-    }
-  }catch(e){
-    console.log('Error fetching producs');
-  }
-}
-async function getPageOfProducts(page){
-  //Gets the total number of pages with 250 products
-  try{
-    let products = await shopify.product.list({ limit:250, page });
-    return products;
-  }catch(e){
-    console.log('Error getting page of products');
-  }
-}
-
 /* Set of Functions to Create and Return a Bundled Box */
 async function createBox(metafields, items, boxDescription){
   //Starts process to create the box
@@ -179,7 +140,5 @@ function deleteBoxProduct(productId){
   });
 }
 
-
-module.exports.getAllProducts = getAllProducts;
 module.exports.createBox = createBox;
 module.exports.handleOrderCreation = handleOrderCreation;
