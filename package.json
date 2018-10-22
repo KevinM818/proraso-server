@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "nodemon app"
+  },
+  "dependencies": {
+    "apollo-fetch": "^0.7.0",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.17.5",
+    "pug": "2.0.0-beta11",
+    "shopify-api-node": "^2.14.0"
+  },
+  "engines": {
+    "node": "8.9.4"
+  }
+}
